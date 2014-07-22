@@ -1,13 +1,27 @@
 <?php
   /*
-    Usage: [eab_event_date date="2014-07-05"]
+    Usage: [eab_event_date date="2014-07-05"], [eab_event_date date="today"], [eab_event_date date="tomorrow"]
   */
     
 	function process_eab_event_date( $atts ) {
 	      $atts = shortcode_atts( array(
 		      'date' => date('d-m-y')
 	      ), $atts );
-	
+		
+		switch( $atts['date'] ){
+			case 'today':
+				$atts['date'] = date('d-m-y');
+				break;
+				
+			case 'tomorrow':
+				$datetime = new DateTime('tomorrow');
+				$atts['date'] = $datetime->format('d-m-y');
+				break;
+				
+			default:
+				$atts['date'] = $atts['date'];	
+		}
+			
 	      $date = explode( '-', $atts['date']);
 	      
 	      $args = array(
