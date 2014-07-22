@@ -5,17 +5,17 @@
     
 	function process_eab_event_date( $atts ) {
 	      $atts = shortcode_atts( array(
-		      'date' => date('d-m-y')
+		      'date' => date('Y-m-d')
 	      ), $atts );
 		
 		switch( $atts['date'] ){
 			case 'today':
-				$atts['date'] = date('d-m-y');
+				$atts['date'] = date('Y-m-d');
 				break;
 				
 			case 'tomorrow':
 				$datetime = new DateTime('tomorrow');
-				$atts['date'] = $datetime->format('d-m-y');
+				$atts['date'] = $datetime->format('Y-m-d');
 				break;
 				
 			default:
